@@ -11,19 +11,6 @@ let currentAccessToken = ''; // Mevcut erişim tokenını sakla
     }, 5000); // Her 5 saniyede bir kontrol et
 });
 
-// Sayfa yüklendiğinde çerezlerden bilgileri al
-window.onload = function() {
-    const savedClientId = getCookie('clientId');
-    const savedClientSecret = getCookie('clientSecret');
-    const savedRefreshToken = getCookie('refreshToken');
-    const savedRevoltToken = getCookie('revoltToken');
-
-    if (savedClientId) document.getElementById('client-id').value = savedClientId;
-    if (savedClientSecret) document.getElementById('client-secret').value = savedClientSecret;
-    if (savedRefreshToken) document.getElementById('refresh-token').value = savedRefreshToken;
-    if (savedRevoltToken) document.getElementById('revolt-token').value = savedRevoltToken;
-};
-
 // Token yenileme fonksiyonu
 function refreshSpotifyToken(clientId, clientSecret, refreshToken) {
     const tokenUrl = 'https://accounts.spotify.com/api/token';
