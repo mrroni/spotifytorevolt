@@ -2,51 +2,6 @@ let lastTrackId = null; // Son çalan parça ID'sini sakla
 let lastStatusMessage = ''; // Son durum mesajını sakla
 let currentAccessToken = ''; // Mevcut erişim tokenını sakla
 
-// Çerezleri ayarlamak için bir yardımcı fonksiyon
-function setCookie(name, value, days) {
-    let expires = "";
-    if (days) {
-        const date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); // Gün cinsinden
-        expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + (value || "") + expires + "; path=/"; // Çerezi ayarla
-}
-
-// Çerezleri okumak için bir yardımcı fonksiyon
-function getCookie(name) {
-    const nameEQ = name + "=";
-    const ca = document.cookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-    }
-    return null; // Çerez yoksa null döndür
-}
-
-// Form submit işlemi
-document.getElementById('credentials-form').addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    const clientId = document.getElementById('client-id').value.trim();
-    const clientSecret = document.getElementById('client-secret').value.trim();
-    const refreshToken = document.getElementById('refresh-token').value.trim();
-    const revoltToken = document.getElementById('revolt-token').value.trim();
-
-    if (!revoltToken) {
-        alert('Lütfen geçerli bir Revolt tokenı girin.');
-        return;
-    }
-
-    // Çerezlere kaydet
-    setCookie('clientId', clientId, 30); // 30 gün boyunca sakla
-    setCookie('clientSecret', clientSecret, 30);
-    setCookie('refreshToken', refreshToken, 30);
-    setCookie('revoltToken', revoltToken, 30);
-
-    console.log('Revolt Token:', revoltToken);
-
     // Hemen bir kez çalıştır, beklemeden durumu güncelle
     checkCurrentTrack(revoltToken, clientId, clientSecret, refreshToken);
 
