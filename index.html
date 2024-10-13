@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify to Revolt Status</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Token görünürlüğü için CSS ayarları */
+        #current-spotify-token {
+            position: relative;
+            cursor: pointer; /* İmleç üzerine geldiğinde el şeklinde olsun */
+        }
+
+        #token-tooltip {
+            display: none; /* Başlangıçta gizli */
+            position: absolute;
+            background-color: #f9f9f9; /* Tooltip arka plan rengi */
+            border: 1px solid #ccc; /* Tooltip kenar rengi */
+            padding: 5px;
+            z-index: 1; /* Diğer elementlerin üstünde görünsün */
+            white-space: nowrap; /* Metin taşmasını önler */
+        }
+
+        #current-spotify-token:hover #token-tooltip {
+            display: block; /* Üzerine gelindiğinde göster */
+        }
+
+        .info-section {
+            background-color: rgba(255, 255, 255, 0.1); /* Yarı saydam beyaz arka plan */
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            color: white;
+        }
+
+        .info-section h3 {
+            color: #ff4654; /* Bilgilendirme başlığı rengi */
+        }
+    </style>
+</head>
+<body>
+    <h1>Spotify to Revolt Status by roni</h1>
+    <p>Spotify ve Revolt API erişim token'larınızı girin:</p>
+    <form id="credentials-form">
+        <label for="client-id">Spotify Client ID:</label>
+        <input type="password" id="client-id" placeholder="Client ID" required>
+
+        <label for="client-secret">Spotify Client Secret:</label>
+        <input type="password" id="client-secret" placeholder="Client Secret" required>
+
+        <label for="refresh-token">Spotify Refresh Token:</label>
+        <input type="password" id="refresh-token" placeholder="Refresh Token" required>
+
+        <label for="revolt-token">Revolt Session Token:</label>
+        <input type="password" id="revolt-token" placeholder="Revolt Token" required>
+
+        <button type="submit">Bağlan ve Durumu Güncelle</button>
+    </form>
+
+    <p id="status-message"></p>
+
+    <div class="info-section">
+        <h3>Client ID, Client Secret, Refresh Token ve Revolt Token Nasıl Elde Edilir?</h3>
+        <p><strong>Spotify Client ID ve Client Secret:</strong> <a href="https://developer.spotify.com/dashboard/applications" target="_self">Spotify Developer Dashboard</a>'a gidin. Yeni bir uygulama oluşturun ve uygulamanızın ayarlarında Client ID ve Client Secret'ınızı göreceksiniz.</p>
+        <p><strong>Spotify Refresh Token:</strong> Refresh Token'ı almak için, kullanıcıdan erişim izni almak için gerekli OAuth 2.0 akışını takip etmeniz gerekir. İlk erişim isteği sırasında refresh token'ı alabilirsiniz. Detaylar için <a href="https://developer.spotify.com/documentation/web-api" target="_self">Spotify API belgeleri</a>ni inceleyin.</p>
+        <p><strong>Revolt Session Token:</strong> Revolt hesabınıza giriş yaptıktan sonra, tarayıcı konsolunu açarak (Ctrl + Shift + I) Application kısmından IndexedDB'nin içinde token'ı görebilirsiniz. Gerekirse bir API istemcisi kullanarak token'ı alabilirsiniz.</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
