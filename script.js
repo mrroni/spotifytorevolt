@@ -2,6 +2,22 @@ let lastTrackId = null; // Son çalan parça ID'sini sakla
 let lastStatusMessage = ''; // Son durum mesajını sakla
 let currentAccessToken = ''; // Mevcut erişim tokenını sakla
 
+// Form submit işlemi
+document.getElementById('credentials-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const clientId = document.getElementById('client-id').value.trim();
+    const clientSecret = document.getElementById('client-secret').value.trim();
+    const refreshToken = document.getElementById('refresh-token').value.trim();
+    const revoltToken = document.getElementById('revolt-token').value.trim();
+
+    if (!revoltToken) {
+        alert('Lütfen geçerli bir Revolt tokenı girin.');
+        return;
+    }
+
+    console.log('Revolt Token:', revoltToken);
+
     // Hemen bir kez çalıştır, beklemeden durumu güncelle
     checkCurrentTrack(revoltToken, clientId, clientSecret, refreshToken);
 
